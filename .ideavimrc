@@ -1,0 +1,167 @@
+let mapleader=' '
+
+set hlsearch
+set incsearch
+set NERDTree
+" 修改括号
+set surround
+" 连接相邻两行内容
+set ideajoin
+" 快速移动
+set easymotion
+" 高亮复制
+set highlightedyank
+" 交换内容
+set exchange
+" 行内快速移动，但是原理和f命令不太一样，参见 https://github.com/unblevable/quick-scope/issues/92
+set quickscope
+
+set smartcase
+set showmode
+set number
+set relativenumber
+set scrolloff=3
+set history=100000
+set clipboard=unnamedplus,unnamed
+
+let g:highlightedyank_highlight_duration = 1000
+let g:highlightedyank_highlight_color = "rgba(245, 194, 231, 100)"
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+let g:qs_second_highlight = 0
+
+" ==================================================
+" Show all the provided actions via `:actionlist`
+" ==================================================
+
+" NERDTree config
+nnoremap <Leader>tr :NERDTree<CR>
+
+" 清空搜索结果
+nnoremap <Leader>sc :nohlsearch<CR>
+
+" 保存
+nnoremap <Leader>fs :w<CR>
+
+" Quit insert mode
+inoremap jj <Esc>
+inoremap jk <Esc>
+inoremap kk <Esc>
+
+" Quit visual mode
+vnoremap v <Esc>
+
+" Move to the start of line，注意是map而不是nnoremap
+map H ^
+
+" Move to the end of line，注意是map而不是nnoremap
+map L $
+
+" Redo
+nnoremap U <C-r>
+
+" 移动，可以在项目或结构窗口中移动，在这种窗口中移动不能使用jk，因为会自动变成搜索文件或结构，ideavim无官方解决办法
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
+inoremap <C-d> <Delete>
+
+" 窗口操作
+nnoremap <Leader>ww <C-W>w
+nnoremap <Leader>wc <C-W>c
+nnoremap <Leader>wj <C-W>j
+nnoremap <Leader>wk <C-W>k
+nnoremap <Leader>wh <C-W>h
+nnoremap <Leader>wl <C-W>l
+nnoremap <Leader>ws <C-W>s
+nnoremap <Leader>w- <C-W>s
+nnoremap <Leader>wv <C-W>v
+nnoremap <Leader>w\| <C-W>v
+nnoremap <Leader>wq :action CloseContent<CR>
+nnoremap <C-q> :action CloseContent<CR>
+
+" buffer操作
+nnoremap tn gt
+nnoremap tp gT
+
+" 将/映射为内置搜索
+nnoremap / :action Find<CR>
+" 但仍然保留/
+nnoremap <Leader>/ /
+
+" 调试
+nnoremap <Leader>da :action ToggleLineBreakpoint<CR>
+nnoremap da :action ToggleLineBreakpoint<CR>
+nnoremap <Leader>dr :action ViewBreakpoints<CR>
+nnoremap dr :action ViewBreakpoints<CR>
+
+" 进入不同模式，如免打扰模式
+nnoremap <Leader>cv :action ChangeView<CR>
+
+" 跳转
+nnoremap ga :action QuickJavaDoc<CR>
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gr :action FindUsages<CR>
+nnoremap gi :action GotoImplementation<CR>
+nnoremap <Leader>ga :action QuickJavaDoc<CR>
+nnoremap <Leader>gd :action GotoDeclaration<CR>
+nnoremap <Leader>gr :action FindUsages<CR>
+nnoremap <Leader>gi :action GotoImplementation<CR>
+
+" 生成函数
+nnoremap gg :action Generate<CR>
+nnoremap <Leader>gg :action Generate<CR>
+
+" 书签
+nnoremap <Leader>ba :action ToggleBookmark<CR>
+nnoremap ba :action ToggleBookmark<CR>
+nnoremap <Leader>bn :action GotoNextBookmark<CR>
+nnoremap bn :action GotoNextBookmark<CR>
+nnoremap <Leader>bp :action GotoPreviousBookmark<CR>
+nnoremap bp :action GotoPreviousBookmark<CR>
+
+" 右键
+nnoremap <Leader>pm :action ShowPopupMenu<CR>
+
+" 运行
+nnoremap <Leader>rc :action RunToCursor<CR>
+nnoremap <Leader>rr :action Run<CR>
+
+" 重构（重命名）
+nnoremap <Leader>rf :action RenameFile<CR>
+nnoremap <Leader>re :action RenameElement<CR>
+
+" 打开结构窗口
+nnoremap <Leader>st :action ActivateStructureToolWindow<CR>
+
+" 缩进
+nnoremap < <<
+nnoremap > >>
+
+" 自动在行末加上分号
+nnoremap <Leader>; m'A;<ESC>`'
+
+" 括号跳转
+nnoremap <A-l> ])
+nnoremap <A-h> [(
+inoremap <A-l> <Esc>])a
+inoremap <A-h> <Esc>[(i
+
+" C-r 的两种模式应起到相同作用
+nnoremap <C-r>0 i<C-r>0<Esc>
+
+" 进行以下动作不将文本复制进寄存器
+" nnoremap dd "_dd
+" nnoremap cc "_cc
+
+" 展开或折叠代码
+nnoremap zr :action ExpandRegion<CR>
+nnoremap zm :action CollapseRegion<CR>
+
+" 交换内容
+nmap <leader>cx <Plug>(Exchange)
+nmap <leader>cxc <Plug>(ExchangeClear)
+nmap <leader>cxx <Plug>(ExchangeLine)
+xmap <leader>X <Plug>(Exchange)
